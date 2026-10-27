@@ -1,1 +1,243 @@
+/* ===== Variabel warna ===== */
+:root {
+  --bg: #f5f6f8;
+  --card: #ffffff;
+  --teks: #1f2430;
+  --teks-lembut: #6b7280;
+  --garis: #e5e7eb;
+  --aksen: #1d6fd6;
+  --aksen-muda: #e6f0fc;
+  --hijau: #0f7b4f;
+  --hijau-muda: #e3f5ec;
+  --kuning: #8a5a00;
+  --kuning-muda: #fdf1d8;
+  --merah: #b42323;
+  --merah-muda: #fcebeb;
+  --radius: 12px;
+}
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14171c;
+    --card: #1d2128;
+    --teks: #e8eaee;
+    --teks-lembut: #98a0ad;
+    --garis: #2c323b;
+    --aksen: #5b9cf0;
+    --aksen-muda: #1c2b40;
+    --hijau: #5fd4a0;
+    --hijau-muda: #15362a;
+    --kuning: #f0c060;
+    --kuning-muda: #3a2f14;
+    --merah: #f08a8a;
+    --merah-muda: #3d1c1c;
+  }
+}
+
+/* ===== Dasar ===== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--teks);
+  line-height: 1.5;
+  font-size: 15px;
+}
+
+h1 { font-size: 18px; font-weight: 600; }
+h2 { font-size: 15px; font-weight: 600; margin-bottom: 12px; }
+
+/* ===== Header + filter ===== */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 14px 24px;
+  background: var(--card);
+  border-bottom: 1px solid var(--garis);
+}
+
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand-icon { font-size: 22px; }
+
+.filters { display: flex; flex-wrap: wrap; gap: 8px; }
+
+input, select, button {
+  font: inherit;
+  color: var(--teks);
+  background: var(--card);
+  border: 1px solid var(--garis);
+  border-radius: 8px;
+  padding: 7px 10px;
+}
+
+input:focus, select:focus, button:focus-visible {
+  outline: 2px solid var(--aksen);
+  outline-offset: 1px;
+}
+
+button { cursor: pointer; }
+button:hover:not(:disabled) { background: var(--aksen-muda); }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ===== Layout utama ===== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 24px 8px;
+}
+
+.pesan {
+  color: var(--teks-lembut);
+  margin-bottom: 12px;
+}
+.pesan:empty { display: none; }
+.pesan.error { color: var(--merah); }
+
+/* ===== Kartu ringkasan ===== */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.kpi {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: var(--card);
+  border: 1px solid var(--garis);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+.kpi-label { font-size: 13px; color: var(--teks-lembut); }
+.kpi-nilai { font-size: 28px; font-weight: 600; }
+
+/* ===== Kartu umum + grid ===== */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.grid-bawah { grid-template-columns: 2fr 1fr; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--garis);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  min-width: 0;
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.card-head h2 { margin-bottom: 0; }
+.card-head input { width: 210px; max-width: 100%; }
+
+.chart-wrap { position: relative; height: 240px; }
+
+/* ===== Tabel ===== */
+.tabel-wrap { overflow-x: auto; }
+
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+
+th {
+  text-align: left;
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--teks-lembut);
+  padding: 8px 10px;
+  white-space: nowrap;
+}
+
+td {
+  padding: 9px 10px;
+  border-top: 1px solid var(--garis);
+  white-space: nowrap;
+}
+
+tbody tr:hover { background: var(--aksen-muda); }
+.angka { text-align: right; }
+
+/* ===== Badge status (dibuat oleh app.js) ===== */
+.badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.badge-selesai  { background: var(--hijau-muda);  color: var(--hijau); }
+.badge-proses   { background: var(--kuning-muda); color: var(--kuning); }
+.badge-tertunda { background: var(--merah-muda);  color: var(--merah); }
+.badge-lain     { background: var(--aksen-muda);  color: var(--aksen); }
+
+/* ===== Pagination ===== */
+.paging {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--teks-lembut);
+}
+
+/* ===== Peringkat pembawa (dibuat oleh app.js) ===== */
+.pembawa-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+
+.pembawa-item { display: flex; align-items: center; gap: 12px; }
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--aksen-muda);
+  color: var(--aksen);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.pembawa-info { flex: 1; min-width: 0; }
+.pembawa-nama { font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pembawa-trip { font-size: 12px; color: var(--teks-lembut); }
+.pembawa-m3 { font-size: 14px; font-weight: 600; white-space: nowrap; }
+
+/* ===== Footer ===== */
+.footer {
+  text-align: center;
+  font-size: 12px;
+  color: var(--teks-lembut);
+  padding: 16px 24px 24px;
+}
+
+/* ===== Responsif ===== */
+@media (max-width: 820px) {
+  .grid-bawah { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .topbar { padding: 12px 16px; }
+  .container { padding: 16px 16px 8px; }
+  .filters { width: 100%; }
+  .filters input, .filters select { flex: 1 1 140px; }
+  .kpi-nilai { font-size: 24px; }
+  .chart-wrap { height: 200px; }
+}
