@@ -1,1 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Pengiriman</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+  <!-- HEADER + FILTER -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-icon">🚚</span>
+      <h1>Dashboard pengiriman</h1>
+    </div>
+    <div class="filters">
+      <input type="date" id="filter-dari" aria-label="Tanggal mulai">
+      <input type="date" id="filter-sampai" aria-label="Tanggal akhir">
+      <select id="filter-site" aria-label="Filter site">
+        <option value="">Semua site</option>
+      </select>
+      <select id="filter-status" aria-label="Filter status">
+        <option value="">Semua status</option>
+      </select>
+      <select id="filter-pembawa" aria-label="Filter pembawa">
+        <option value="">Semua pembawa</option>
+      </select>
+      <button id="btn-reset" type="button">Reset</button>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- PESAN STATUS (loading / error) -->
+    <p id="pesan" class="pesan">Memuat data…</p>
+
+    <!-- KARTU RINGKASAN -->
+    <section class="kpi-grid" aria-label="Ringkasan">
+      <div class="kpi">
+        <span class="kpi-label">Total pengiriman</span>
+        <span class="kpi-nilai" id="kpi-total">-</span>
+      </div>
+      <div class="kpi">
+        <span class="kpi-label">Total kubikasi</span>
+        <span class="kpi-nilai" id="kpi-kubikasi">-</span>
+      </div>
+      <div class="kpi">
+        <span class="kpi-label">Pembawa aktif</span>
+        <span class="kpi-nilai" id="kpi-pembawa">-</span>
+      </div>
+      <div class="kpi">
+        <span class="kpi-label">Rata-rata per kiriman</span>
+        <span class="kpi-nilai" id="kpi-rata">-</span>
+      </div>
+    </section>
+
+    <!-- GRAFIK -->
+    <section class="grid-2" aria-label="Grafik">
+      <div class="card">
+        <h2>Tren kubikasi harian</h2>
+        <div class="chart-wrap">
+          <canvas id="chart-tren"></canvas>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Kubikasi per site</h2>
+        <div class="chart-wrap">
+          <canvas id="chart-site"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- TABEL + PEMBAWA -->
+    <section class="grid-2 grid-bawah" aria-label="Detail">
+      <div class="card">
+        <div class="card-head">
+          <h2>Detail pengiriman</h2>
+          <input type="text" id="cari" placeholder="Cari no. order, tujuan…" aria-label="Cari pengiriman">
+        </div>
+        <div class="tabel-wrap">
+          <table id="tabel-pengiriman">
+            <thead>
+              <tr>
+                <th>No. order</th>
+                <th>Tanggal</th>
+                <th>Tujuan</th>
+                <th>Pembawa</th>
+                <th class="angka">m³</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="paging">
+          <button id="btn-prev" type="button">Sebelumnya</button>
+          <span id="info-halaman">Halaman 1</span>
+          <button id="btn-next" type="button">Berikutnya</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Peringkat pembawa</h2>
+        <ul id="daftar-pembawa" class="pembawa-list"></ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <span id="update-info">Data diambil dari Google Sheets</span>
+  </footer>
+
+  <!-- Library via CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
